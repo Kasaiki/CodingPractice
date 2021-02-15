@@ -1,0 +1,38 @@
+/* 3. Insert Sort */
+#include <iostream>
+using namespace std;
+
+void InsertSort(int arr[], int size){
+	int temp;
+	for (int index = 1; index < size; index++) {
+		temp = arr[index];
+
+		for (int left = index - 1; left >= 0; left--) {
+			if (arr[left] > temp) {
+				arr[left + 1] = arr[left];
+				if (left == 0) {
+					arr[left] = temp;
+				}
+			} else {
+				arr[left + 1] = temp;
+				break;
+			}
+		}
+	}
+}
+
+int main()
+{
+	int arr[] = { 4,8,2,7,6,0 };
+
+	int size = sizeof(arr) / sizeof(arr[0]);
+
+	InsertSort(arr, size);
+
+	for (int i = 0; i < size; i++) {
+		cout << arr[i] << "  ";
+	}
+	
+	system("pause");
+	return 0;
+}
