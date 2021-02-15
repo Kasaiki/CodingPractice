@@ -1,0 +1,43 @@
+/* 4. Simple Selection Sort */
+
+#include<iostream>
+
+void Sort(int arr[], int start, int end )
+{
+	if (start == end)return;
+	int min = arr[end];
+	for (int i = end; i > start; i--) {
+		arr[i] = arr[i-1];
+	}
+	arr[start] = min;
+}
+
+void SimpleSelectionSort(int arr[],int size)
+{
+	int min , index_min;
+	for (int i = 0; i < size-1; i++) {
+		min = arr[i];
+		index_min = i;
+
+		for (int j = i; j < size; j++) {
+			if (arr[j] < min) {
+				min = arr[j];
+				index_min = j;
+			}
+		}
+		Sort(arr, i, index_min);
+	}
+}
+
+int main()
+{
+	int arr[] = { 2,5,6,3,1,9,8,7,0,4 };
+	int size = sizeof(arr) / sizeof(arr[0]);
+
+	SimpleSelectionSort(arr, size);
+
+	for (int i = 0; i < size; i++) {
+		std::cout << arr[i] << "  ";
+	}
+	return 0;
+}
