@@ -1,0 +1,27 @@
+/* 1. Find out all of narcissistic numbers between of 100 ~ 999 */
+#include <iostream>
+
+using namespace std;
+
+int PowInt(int x);
+
+int main()
+{
+	int index = 100;
+	do {
+		int t0 = index % 10;
+		int t1 = index / 10 % 10;
+		int t2 = index / 100;
+		if ( (PowInt(t0) + PowInt(t1) + PowInt(t2)) == index) {
+			cout << index << endl;
+		}
+		index++;
+	} while (index <= 999);
+	system("pause");
+	return 0;
+}
+
+int PowInt(int x)
+{
+	return x * x * x;
+}
