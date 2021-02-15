@@ -9,8 +9,10 @@ using namespace std;
 void Sort(int arr[], int size , int gap)
 {
 	int temp;
-	for (int i = 0; i <= size - gap; i+=gap) { // shell group
-		for (int j = i; j < size - gap; j += gap) { // bubble sort
+	/* sort with different gap */
+	for (int i = 0; i <= size - gap; i+=gap) { 
+		/* bubble sort */
+		for (int j = i; j < size - gap; j += gap) { 
 			for (int k = j + gap; k < size; k += gap) {
 				if (arr[j] > arr[k]) {
 					temp = arr[j];
