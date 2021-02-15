@@ -1,0 +1,49 @@
+/* 4. Shell`s Sort */
+/* with 2^n-1 as sort intervals */
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void Sort(int arr[], int size , int gap)
+{
+	int temp;
+	for (int i = 0; i <= size - gap; i+=gap) { // shell group
+		for (int j = i; j < size - gap; j += gap) { // bubble sort
+			for (int k = j + gap; k < size; k += gap) {
+				if (arr[j] > arr[k]) {
+					temp = arr[j];
+					arr[j] = arr[k];
+					arr[k] = temp;
+				}
+			}
+		}
+	}
+}
+
+void ShellSort(int arr[], int size)
+{
+	vector<int>gap;
+	for(int g = size; g > 0; g--) {
+		if (g * g - 1 < size) {
+			gap.push_back(g);
+		}
+	}
+
+	for (unsigned int g=0; g < gap.size(); g++) {
+		Sort(arr, size, gap[g]);
+	}
+}
+
+int main()
+{
+	int arr[] = { 2,5,6,3,1,9,8,7,0,4 };
+	int size = sizeof(arr) / sizeof(arr[0]);
+
+	ShellSort(arr, size);
+
+	for (int a=0; a < size; a++) {
+		cout << arr[a] << "  ";
+	}
+}
