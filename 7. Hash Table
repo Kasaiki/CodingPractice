@@ -1,0 +1,70 @@
+#include <iostream>
+
+using namespace std;
+
+typedef struct Member
+{
+	int num;
+	string name;
+};
+
+typedef struct __node
+{
+	Member data;
+	struct __node* next;
+}Node;
+
+typedef struct
+{
+	int size;
+	Node** table;
+}ChainHash;
+
+static int hashValue(int key, int size)
+{
+	return key % size;
+}
+
+static void SetNode(Node* node, const Member &x, Node *next)
+{
+	node->data = x;
+	node->next = next;
+}
+
+void HashInit(ChainHash* h, int size)
+{
+	h->table = new Node *[size];
+
+	for (int i = 0; i < size; i++) {
+		h->table[i] = NULL;
+	}
+}
+
+Node* Search(const ChainHash* h, const Member *m)
+{
+	int key = hashValue(m->num, h->size);
+	Node *p = h->table[key];
+
+	while (p != NULL) {
+		if (p->data.num == m->num)
+			return p;
+		p = p->next;
+	}
+	return NULL;
+}
+
+int Add(ChainHash* h, const Member* m)
+{
+	int key = hashValue(m->num, h->size);
+	Node* p = h->table[key];
+	Node* temp = new Node();
+
+	while (p!=NULL) {
+		if (p->data.num == m->num)
+			return 1;
+		p = h->table[key]->next;
+	}
+
+	SetNode(temp, *m, p);
+	h->table[key] = temp;
+}
